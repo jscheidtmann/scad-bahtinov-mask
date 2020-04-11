@@ -2,20 +2,23 @@
 //          Bahtinov 
 //            Mask 
 //         Generator
-//           _____
-//       _---     ---_
-//     --    \\ //    --
-//    /   \\\\\ /////   \
-//   /   \\\\\\ //////   \
-//   |  \\\\\\\ ///////  |
-//  |   \\\\\\\ ///////   |
-//  |                     |
-//  |   |||||||||||||||   |
-//   |  |||||||||||||||  |
-//   \   |||||||||||||   /
-//    \   |||||||||||   / 
-//     --_   |||||   _--        
-//        ---_____---
+//
+//
+//            | |<- vbar
+//           _____   ____________________________
+//       _---     ---_   ________________    |
+//     --    \\ //    --              |      |
+//    /   \\\\\ /////   \             |      |
+//   /   \\\\\\ //////   \            |   dia_ext
+//   |  \\\\\\\ ///////  |            |      |
+//  |   \\\\\\\ ///////   | __        |      |
+//  |                     | __ hbar   |      |
+//  |   |||||||||||||||   |           |      |
+//   |  |||||||||||||||  |         dia_int   |
+//   \   |||||||||||||   /            |      |
+//    \   |||||||||||   /             |      |
+//     --_   |||||   _-- ________________    |
+//        ---_____---  _________________________
 //
 //
 ///////////////////////////////////////////////////////////
@@ -31,15 +34,14 @@
 // Dimensions of Mask
 //
 
+   // exterior diameter, including the stabilizing ring
+dia_ext = 90;     
    // interior diameter, this will be the area of the bars.
 dia_int = 80;               
 
-   // exterior diameter, including the stabilizing ring
-dia_ext = 90;     
-
    // width of support structures
-hbar_width = 5;
-vbar_wdith = 5;
+hbar = 5;
+vbar = 5;
 
    // thickness of mask
 thickness = 1.5;
@@ -48,7 +50,7 @@ thickness = 1.5;
 // Definition of bars, that make up the interference structure
 //  
 
-   // angle that the baars are tilted against each other in upper half.
+   // angle that the bars are tilted against each other in upper half.
 angle = 15;  // degree        
 
    // define bar dimensions
@@ -148,13 +150,13 @@ difference() {
 
 // Step 6)
 // Support Structure: Horizontal Bar
-translate([-hbar_width/2,-radius-tolerance,0])
-   cube([hbar_width,dia_int+2*tolerance,thickness]);
+translate([-hbar/2,-radius-tolerance,0])
+   cube([hbar,dia_int+2*tolerance,thickness]);
 
 // Step 7)
 // Support Structure: Vertical Bar
-translate([0,-hbar_width/2,0])
-   cube([radius+tolerance,hbar_width,thickness]);
+translate([0,-hbar/2,0])
+   cube([radius+tolerance,hbar,thickness]);
 
 
 
