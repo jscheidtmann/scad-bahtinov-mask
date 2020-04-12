@@ -157,6 +157,16 @@ no_bars = ceil(radius / step)+1;
 //          cube([radius + tolerance,portion * step,thickness]);
 // }
 
+/// If you want to have a 2D file (SVG, DXF), e.g. for 
+/// lasercutting, other machining or print-out,
+/// uncomment the following line:
+
+// projection()
+
+
+// Step -1)
+// Create an explicit union, to allow for projection.
+union() {
 
 // Step 0)
 // Make sure the bars are cut off in Step 4
@@ -224,5 +234,4 @@ translate([-hbar/2,-radius-tolerance,0])
 translate([0,-hbar/2,0])
    cube([radius+tolerance,hbar,thickness]);
 
-
-
+}; // union()
