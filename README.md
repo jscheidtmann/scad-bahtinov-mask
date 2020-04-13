@@ -23,7 +23,7 @@ pattern you can set the focus correctly to the plane of the source.
 
 # How to use the Generator
 
-Read this section completely: Download the generator by following [this link](https://github.com/jscheidtmann/scad-bahtinov-mask/raw/master/bahtinov.scad). 
+Read this section completely: Download the generator by following [this link](https://github.com/jscheidtmann/scad-bahtinov-mask/raw/master/bahtinov.scad) and saving the file.
 Open the file in [OpenSCAD](http://openscad.org) (seperate download and install).  
 Go through the document and set the parameters as you see fit. Then render the mask using F6. When you are 
 satisfied, export the STL and print.
