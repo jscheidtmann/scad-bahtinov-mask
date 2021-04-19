@@ -256,7 +256,9 @@ translate([0,0,thickness-tolerance])
         cylinder(holder_height+tolerance, r=radius_ext);
         cylinder(holder_height+tolerance, 
                  radius_ext-holder_wall, 
-                 radius_ext-holder_wall/holder_thinning);  
+                 radius_ext-holder_wall/holder_thinning);
+        echo("Inner diameter = ", 2*(radius_ext-holder_wall));
+        echo("Inner diameter at mask = ", 2*(radius_ext-holder_wall/holder_thinning));  
     }; 
 
 }; // union()
