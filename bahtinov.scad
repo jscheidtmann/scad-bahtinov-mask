@@ -86,19 +86,33 @@
 
 //
 // Dimensions of Mask
+// (given in millimeter)
 //
 
    // exterior diameter, including the stabilizing ring
-dia_ext = 90;     
+   // AND holder structure (see below)
+dia_ext = 60;     
    // interior diameter, this will be the area of the bars.
-dia_int = 80;               
+dia_int = 54;               
 
    // width of support structures
-hbar = 5;
-vbar = 5;
+hbar = 3;
+vbar = 3;
 
    // thickness of mask
 thickness = 1.5;
+
+//
+// Holder structure
+//
+
+    // A cylinder of this height and wall thickness.
+    // Note that in order to be able to easily fit it over 
+    // the telecopes aperture, the wall thickness is made
+    // thinner by a factor of 1/holder_thinning.
+holder_height = 20;
+holder_wall = 1.5;
+holder_thinning = 3;
 
 //
 // Definition of bars, that make up the interference structure
@@ -108,7 +122,7 @@ thickness = 1.5;
 angle = 15;  // degrees        
 
    // define bar dimensions
-focal_length = 420;    // given in mm
+focal_length = 200;    // given in mm
 
    // Factor to determine step size 
 bahtinov_const = 150;  // [150-200] 
@@ -123,6 +137,7 @@ bahtinov_factor = 1;   // [1 or 3]
    // rounded to next 1/10th of a mm
    // WARNING: If this is extremly small, rendering time will be slow
 step = round(10* focal_length / bahtinov_const * bahtinov_factor)/10;
+echo("step = ", step);
 
    // portion that will be bar (as part of "step")
 portion = 1/2;   
@@ -151,7 +166,7 @@ no_bars = ceil(radius / step)+1;
    // Note: half of them, due to radius
 
 // Reapeat the bars.
-// module bar_grid(n_bars, step, portion, length, thickness) {
+// module bar_grid(no_bars, step, portion, length, thickness) {
 //    for (pos = [-no_bars*step : step : no_bars*step])
 //       translate([0,pos + step/4,0])
 //          cube([radius + tolerance,portion * step,thickness]);
@@ -180,7 +195,7 @@ difference(){
               cube([radius + tolerance,portion * step,thickness]);
 
         // Step 2)
-        // The bars (rilted to right, top right)
+        // The bars (tilted to right, top right)
         difference() {
             rotate([0,0,-angle/2]) 
             for (pos = [-no_bars*step : step : no_bars*step])
@@ -233,5 +248,15 @@ translate([-hbar/2,-radius-tolerance,0])
 // Support Structure: Vertical Bar
 translate([0,-hbar/2,0])
    cube([radius+tolerance,hbar,thickness]);
+
+// Holder Structure
+// 
+translate([0,0,thickness-tolerance])
+    difference() {
+        cylinder(holder_height+tolerance, r=radius_ext);
+        cylinder(holder_height+tolerance, 
+                 radius_ext-holder_wall, 
+                 radius_ext-holder_wall/holder_thinning);  
+    }; 
 
 }; // union()
